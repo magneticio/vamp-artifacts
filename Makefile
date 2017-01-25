@@ -17,18 +17,22 @@ endif
 .PHONY: all
 all: default
 
-# Using our buildserver which contains all the necessary dependencies
 .PHONY: default
 default:
+	make pack
+
+.PHONY: pack
+pack:
 	rm -Rf $(CURDIR)/target && mkdir $(CURDIR)/target && \
 	cp -R $(CURDIR)/blueprints $(CURDIR)/breeds $(CURDIR)/workflows $(CURDIR)/target/. && \
 	export version="$$(git describe --tags)" && \
 	docker volume create packer && \
 	docker run \
+    --rm \
     --name packer \
     --interactive \
     --volume $(CURDIR)/target:/usr/local/src \
     --volume packer:/usr/local/stash \
     $(BUILD_PACKER) \
       vamp-artifacts $${version} && \
-  docker rm packer && rm -Rf $(CURDIR)/target
+  rm -Rf $(CURDIR)/target

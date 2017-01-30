@@ -23,5 +23,10 @@ api.deployments().each(function (deployment) {
       });
     }
   }
+
+  allocation.cpu = Math.round(allocation.cpu * 100) / 100;
+  allocation.memory = Math.round(allocation.memory * 100) / 100;
+  allocation.instances = Math.round(allocation.instances * 100) / 100;
+
   publish(deployment, allocation);
 });

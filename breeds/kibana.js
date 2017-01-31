@@ -7,8 +7,8 @@ let api = new vamp.Api();
 var http = new vamp.Http();
 
 let httpStatus = function (url) {
-  return _(http.get(url).catch(function (response) {
-    return response.statusCode != 404;
+  return _(http.get(url).catch(function () {
+    return false;
   }));
 };
 

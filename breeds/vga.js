@@ -12,7 +12,7 @@ api.config().each(function (config) {
   let marathon = config['vamp.container-driver.marathon.url'];
   let zookeeper = config['vamp.persistence.key-value-store.zookeeper.servers'];
   let haproxy = config['vamp.gateway-driver.haproxy.version'];
-  let logstash = config['vamp.gateway-driver.logstash.url'];
+  let elasticsearch = config['vamp.pulse.elasticsearch.url'];
 
   _(http.get(mesos + '/master/slaves').then(JSON.parse)).each(function (response) {
 
@@ -20,12 +20,12 @@ api.config().each(function (config) {
 
     let vga = {
       "id": "/vamp/vamp-gateway-agent",
-      "args": [
-        "--storeType=zookeeper",
-        "--storeConnection=" + zookeeper,
-        "--storeKey=/vamp/gateways/haproxy/" + haproxy,
-        "--logstash=" + logstash
-      ],
+      "env": {
+        "VAMP_KEY_VALUE_STORE_TYPE": "zookeeper",
+        "VAMP_KEY_VALUE_STORE_CONNECTION": zookeeper,
+        "VAMP_KEY_VALUE_STORE_PATH": "/vamp/gateways/haproxy/" + haproxy + "/configuration",
+        "VAMP_ELASTICSEARCH_URL": elasticsearch
+      },
       "cpus": 0.2,
       "mem": 256.0,
       "instances": instances,
@@ -43,7 +43,6 @@ api.config().each(function (config) {
           "parameters": []
         }
       },
-      "env": {},
       "constraints": [
         ["hostname", "UNIQUE"]
       ],

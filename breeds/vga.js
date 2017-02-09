@@ -46,6 +46,17 @@ api.config().each(function (config) {
       "constraints": [
         ["hostname", "UNIQUE"]
       ],
+      "healthChecks": [
+        {
+          "path": "/health",
+          "protocol": "HTTP",
+          "port": 1988,
+          "gracePeriodSeconds": 30,
+          "intervalSeconds": 10,
+          "timeoutSeconds": 5,
+          "maxConsecutiveFailures": 3
+        }
+      ],
       "labels": {}
     };
 

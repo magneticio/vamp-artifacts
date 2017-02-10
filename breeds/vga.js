@@ -39,7 +39,8 @@ api.config().each(function (config) {
           "network": "HOST",
           "portMappings": [],
           "privileged": true,
-          "parameters": []
+          "parameters": [],
+          "forcePullImage": true
         }
       },
       "constraints": [

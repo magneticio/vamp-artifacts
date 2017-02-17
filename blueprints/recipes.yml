@@ -1,0 +1,19 @@
+---
+name: recipes
+kind: blueprint
+gateways:
+  9088: recipes/webport
+clusters:
+  recipes:
+    services:
+      breed:
+        name: recipes:katana
+        deployable: magneticio/vamp-runner:katana
+        ports:
+          webport: 8088/http
+        environment_variables:
+          VAMP_RUNNER_API_URL: ${config://vamp.url}/api/v1
+      scale:
+        cpu: 0.2
+        memory: 256MB
+        instances: 1

@@ -1,0 +1,16 @@
+---
+name: vamp-workflow-javascript
+kind: breed
+deployable: magneticio/vamp-workflow-agent:katana
+ports:
+  webport: 8080/http
+environment_variables:
+  VAMP_URL: ${config://vamp.url}
+  VAMP_KEY_VALUE_STORE_PATH: /vamp/workflows/${workflow}
+  VAMP_KEY_VALUE_STORE_TYPE: ${config://vamp.persistence.key-value-store.type}
+  VAMP_KEY_VALUE_STORE_CONNECTION: ${config://vamp.persistence.key-value-store.zookeeper.servers}
+  VAMP_WORKFLOW_EXECUTION_PERIOD: 5
+  VAMP_WORKFLOW_EXECUTION_TIMEOUT: 10
+  VAMP_ELASTICSEARCH_URL: ${config://vamp.pulse.elasticsearch.url}
+arguments:
+- privileged: true

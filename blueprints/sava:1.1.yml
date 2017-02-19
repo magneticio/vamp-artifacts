@@ -10,6 +10,9 @@ clusters:
         deployable: magneticio/sava:1.1.0
         ports:
           webport: 8080/http
+          jsonport: 8081/http
+        environment_variables:
+          SAVA_DEBUG: false
       scale:
         cpu: 0.2
         memory: 64MB

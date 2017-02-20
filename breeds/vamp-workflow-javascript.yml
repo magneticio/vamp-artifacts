@@ -14,3 +14,9 @@ environment_variables:
   VAMP_ELASTICSEARCH_URL          : ${config://vamp.workflow-driver.workflow.vamp-elasticsearch-url}
 arguments:
 - privileged: true
+health_checks:
+  port: webport
+  initial_delay: 10s
+  timeout: 5s
+  interval: 30s
+  failures: 5

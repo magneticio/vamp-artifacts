@@ -12,7 +12,7 @@ clusters:
         ports:
           webport: 8088/http
         environment_variables:
-          VAMP_RUNNER_API_URL: ${config://vamp.url}/api/v1
+          VAMP_RUNNER_API_URL: ${config://vamp.workflow-driver.workflow.vamp-url}/api/v1
       scale:
         cpu: 0.2
         memory: 256MB

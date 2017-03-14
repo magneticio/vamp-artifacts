@@ -33,9 +33,9 @@ pack:
 
 	docker volume create packer
 	docker run \
-		--rm \
-		--name packer \
 		--interactive \
+		--tty \
+		--rm \
 		--volume $(CURDIR)/target:/usr/local/src \
 		--volume packer:/usr/local/stash \
 		$(BUILD_SERVER) \

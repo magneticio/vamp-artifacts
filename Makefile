@@ -33,6 +33,10 @@ pack:
 
 	docker volume create packer
 	docker run \
+		--interactive \
+		--tty \
+		--rm \
+		--volume $(CURDIR)/target:/usr/local/src \
 		--volume packer:/usr/local/stash \
 		$(BUILD_SERVER) \
 			push vamp-artifacts $(VERSION)

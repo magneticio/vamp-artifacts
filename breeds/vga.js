@@ -12,6 +12,7 @@ api.config().each(function (config) {
   let marathon = config['vamp.container-driver.marathon.url'];
   let zookeeper = config['vamp.persistence.key-value-store.zookeeper.servers'];
   let elasticsearch = config['vamp.pulse.elasticsearch.url'];
+  let namespace = config['vamp.namespace'];
 
   _(http.get(mesos + '/master/slaves').then(JSON.parse)).each(function (response) {
 
@@ -22,7 +23,7 @@ api.config().each(function (config) {
       "env": {
         "VAMP_KEY_VALUE_STORE_TYPE": "zookeeper",
         "VAMP_KEY_VALUE_STORE_CONNECTION": zookeeper,
-        "VAMP_KEY_VALUE_STORE_PATH": "/vamp/gateways/haproxy/1.7/configuration",
+        "VAMP_KEY_VALUE_STORE_PATH": "/vamp/" + namespace + "/gateways/haproxy/1.7/configuration",
         "VAMP_ELASTICSEARCH_URL": elasticsearch
       },
       "cpus": 0.2,

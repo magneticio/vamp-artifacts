@@ -18,12 +18,9 @@ TARGET  := $(CURDIR)/target
 VERSION := $(shell git describe --tags)
 
 # Targets
-.PHONY: all
-all: default
-
 .PHONY: default
 default:
-	make pack
+	$(MAKE) pack
 
 .PHONY: pack
 pack:

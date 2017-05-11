@@ -15,7 +15,7 @@ endif
 
 # Don't change these
 VERSION := $(shell git describe --tags)
-TARGET  := $(CURDIR)/target/$(VERSION)
+TARGET  := $(CURDIR)/target
 
 
 # Targets
@@ -27,6 +27,7 @@ default:
 pack:
 	rm -Rf $(TARGET)
 	mkdir $(TARGET)
+	mkdir $(TARGET)/$(VERSION)
 	cp -R $(CURDIR)/blueprints $(CURDIR)/breeds $(CURDIR)/workflows $(TARGET)
 
 	docker volume create packer
@@ -38,4 +39,3 @@ pack:
 			push vamp-artifacts $(VERSION)
 
 	rm -Rf $(CURDIR)/target
-

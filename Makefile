@@ -14,8 +14,9 @@ ifneq ("$(wildcard Makefile.local)", "")
 endif
 
 # Don't change these
-TARGET  := $(CURDIR)/target
 VERSION := $(shell git describe --tags)
+TARGET  := $(CURDIR)/target/$(VERSION)
+
 
 # Targets
 .PHONY: default
@@ -37,3 +38,4 @@ pack:
 			push vamp-artifacts $(VERSION)
 
 	rm -Rf $(CURDIR)/target
+

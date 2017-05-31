@@ -7,6 +7,7 @@ ports:
 environment_variables:
   VAMP_URL                        : ${config://vamp.workflow-driver.workflow.vamp-url}
   VAMP_NAMESPACE                  : ${config://vamp.namespace}
+  VAMP_API_TOKEN                  : ${vamp://token}
   VAMP_KEY_VALUE_STORE_PATH       : ${config://vamp.workflow-driver.workflow.vamp-key-value-store-path}
   VAMP_KEY_VALUE_STORE_TYPE       : ${config://vamp.workflow-driver.workflow.vamp-key-value-store-type}
   VAMP_KEY_VALUE_STORE_CONNECTION : ${config://vamp.workflow-driver.workflow.vamp-vamp-key-value-store-connection}

@@ -14,7 +14,7 @@ ifneq ("$(wildcard Makefile.local)", "")
 endif
 
 # Don't change these
-VERSION := $(shell git describe --tags)
+VERSION := $(shell git tag | tail -n1)
 TARGET  := $(CURDIR)/target
 
 

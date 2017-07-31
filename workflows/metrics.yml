@@ -2,5 +2,8 @@ name    : metrics
 breed   : metrics
 schedule: daemon
 environment_variables:
-  VAMP_WORKFLOW_EXECUTION_PERIOD:  5
+  VAMP_WORKFLOW_EXECUTION_PERIOD : 5
   VAMP_WORKFLOW_EXECUTION_TIMEOUT: 7
+  VAMP_PULSE_ELASTICSEARCH_URL                   : ${config://vamp.pulse.elasticsearch.url}
+  VAMP_GATEWAY_DRIVER_ELASTICSEARCH_METRICS_TYPE : ${config://vamp.gateway-driver.elasticsearch.metrics.type}
+  VAMP_GATEWAY_DRIVER_ELASTICSEARCH_METRICS_INDEX: ${config://vamp.gateway-driver.elasticsearch.metrics.index}

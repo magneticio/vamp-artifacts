@@ -1,4 +1,5 @@
 name    : allocation
+kind    : workflows
 breed   : allocation
 schedule: daemon
 environment_variables:

@@ -1,6 +1,6 @@
 ---
 name: recipes
-kind: blueprint
+kind: blueprints
 gateways:
   9088: recipes/webport
 clusters:

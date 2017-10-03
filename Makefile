@@ -14,9 +14,8 @@ ifneq ("$(wildcard Makefile.local)", "")
 endif
 
 # Don't change these
-VERSION := $(shell git tag | tail -n1)
 TARGET  := $(CURDIR)/target
-
+VERSION := $(shell git describe --tags)
 
 # Targets
 .PHONY: default

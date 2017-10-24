@@ -18,23 +18,26 @@ TARGET  := $(CURDIR)/target
 VERSION := $(shell git describe --tags)
 
 # Targets
+.PHONY: all
+all: default
+
 .PHONY: default
-default:
-	$(MAKE) pack
+default: pack
 
 .PHONY: pack
 pack:
 	rm -Rf $(TARGET)
-	mkdir $(TARGET)
-	mkdir $(TARGET)/$(VERSION)
+	mkdir -p $(TARGET)/$(VERSION)
 	cp -R $(CURDIR)/blueprints $(CURDIR)/breeds $(CURDIR)/workflows $(TARGET)
 
 	docker volume create packer
+	docker pull $(BUILD_SERVER)
 	docker run \
+		--name packer \
 		--rm \
 		--volume $(CURDIR)/target:/usr/local/src \
 		--volume packer:/usr/local/stash \
 		$(BUILD_SERVER) \
 			push vamp-artifacts $(VERSION)
 
-	rm -Rf $(CURDIR)/target
+	rm -Rf $(TARGET)

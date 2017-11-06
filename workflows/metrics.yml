@@ -1,4 +1,5 @@
 name    : metrics
+kind    : workflows
 breed   : metrics
 schedule: daemon
 environment_variables:

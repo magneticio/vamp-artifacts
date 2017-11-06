@@ -1,4 +1,5 @@
 name    : vga
+kind    : workflows
 breed   : vga
 schedule: daemon
 environment_variables:

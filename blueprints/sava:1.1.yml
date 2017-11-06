@@ -1,5 +1,6 @@
 ---
 name: sava:1.1
+kind: blueprints
 gateways:
   9060: sava/webport
 clusters:

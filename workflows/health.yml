@@ -1,4 +1,5 @@
 name    : health
+kind    : workflows
 breed   : health
 schedule: daemon
 environment_variables:

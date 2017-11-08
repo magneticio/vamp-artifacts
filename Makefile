@@ -33,7 +33,6 @@ pack:
 	docker volume create packer
 	docker pull $(BUILD_SERVER)
 	docker run \
-		--name packer \
 		--rm \
 		--volume $(CURDIR)/target:/usr/local/src \
 		--volume packer:/usr/local/stash \

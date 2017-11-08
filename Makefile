@@ -6,6 +6,7 @@ SHELL             := bash
 .SUFFIXES:
 
 # Constants, these can be overwritten in your Makefile.local
+PACKER       ?= packer
 BUILD_SERVER := magneticio/buildserver
 
 # if Makefile.local exists, include it.
@@ -30,12 +31,12 @@ pack:
 	mkdir -p $(TARGET)/$(VERSION)
 	cp -R $(CURDIR)/blueprints $(CURDIR)/breeds $(CURDIR)/workflows $(TARGET)
 
-	docker volume create packer
+	docker volume create $(PACKER)
 	docker pull $(BUILD_SERVER)
 	docker run \
 		--rm \
 		--volume $(CURDIR)/target:/usr/local/src \
-		--volume packer:/usr/local/stash \
+		--volume $(PACKER):/usr/local/stash \
 		$(BUILD_SERVER) \
 			push vamp-artifacts $(VERSION)
 

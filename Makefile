@@ -26,18 +26,19 @@ all: default
 default: pack
 
 .PHONY: pack
-pack:
-	rm -Rf $(TARGET)
+pack: clean
 	mkdir -p $(TARGET)/$(VERSION)
-	cp -R $(CURDIR)/blueprints $(CURDIR)/breeds $(CURDIR)/workflows $(TARGET)
+	cp -R $(CURDIR)/blueprints $(CURDIR)/breeds $(CURDIR)/workflows $(TARGET)/$(VERSION)
 
 	docker volume create $(PACKER)
 	docker pull $(BUILD_SERVER)
 	docker run \
 		--rm \
-		--volume $(CURDIR)/target:/usr/local/src \
+		--volume $(CURDIR)/target/$(VERSION):/usr/local/src \
 		--volume $(PACKER):/usr/local/stash \
 		$(BUILD_SERVER) \
 			push vamp-artifacts $(VERSION)
 
+.PHONY: clean
+clean:
 	rm -Rf $(TARGET)

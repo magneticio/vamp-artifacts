@@ -15,7 +15,7 @@ ifneq ("$(wildcard Makefile.local)", "")
 endif
 
 # Don't change these
-TARGET  := $(CURDIR)/target
+TARGET  := "$(CURDIR)"/target
 VERSION := $(shell git describe --tags)
 
 # Targets
@@ -28,13 +28,13 @@ default: pack
 .PHONY: pack
 pack: clean
 	mkdir -p $(TARGET)/$(VERSION)
-	cp -R $(CURDIR)/blueprints $(CURDIR)/breeds $(CURDIR)/workflows $(TARGET)/$(VERSION)
+	cp -R "$(CURDIR)"/blueprints "$(CURDIR)"/breeds "$(CURDIR)"/workflows $(TARGET)/$(VERSION)
 
 	docker volume create $(PACKER)
 	docker pull $(BUILD_SERVER)
 	docker run \
 		--rm \
-		--volume $(CURDIR)/target/$(VERSION):/usr/local/src \
+		--volume $(TARGET)/$(VERSION):/usr/local/src \
 		--volume $(PACKER):/usr/local/stash \
 		$(BUILD_SERVER) \
 			push vamp-artifacts $(VERSION)

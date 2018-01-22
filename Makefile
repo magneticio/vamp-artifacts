@@ -31,7 +31,7 @@ pack: clean
 	cp -R "$(CURDIR)"/blueprints "$(CURDIR)"/breeds "$(CURDIR)"/workflows $(TARGET)/$(VERSION)
 
 	docker volume create $(PACKER)
-	docker pull $(BUILD_SERVER)
+	test "$(DEPS_OK)" = "true" || docker pull $(BUILD_SERVER)
 	docker run \
 		--rm \
 		--volume $(TARGET)/$(VERSION):/usr/local/src \

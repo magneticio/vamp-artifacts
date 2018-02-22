@@ -1,14 +1,19 @@
 'use strict';
 
+let type = process.env.VAMP_ELASTICSEARCH_EVENT_TYPE;
+if (!type) throw 'no type';
+
 let _ = require('highland');
 let vamp = require('vamp-node-client');
 
 let api = new vamp.Api();
 let logger = new vamp.Log();
+let metrics = new vamp.ElasticsearchMetrics(api);
 
 function publish(deployment, allocation) {
   logger.log('allocation for [' + deployment.name + ']: ' + JSON.stringify(allocation));
-  api.event(['allocation', 'deployments:' + deployment.name], allocation, 'allocation');
+  metrics.event([type, 'deployments:' + deployment.name], allocation, type).done(function () {
+  });
 }
 
 api.deployments().each(function (deployment) {

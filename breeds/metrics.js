@@ -1,5 +1,8 @@
 'use strict';
 
+let type = process.env.VAMP_ELASTICSEARCH_EVENT_TYPE;
+if (!type) throw 'no type';
+
 let _ = require('highland');
 let vamp = require('vamp-node-client');
 
@@ -7,11 +10,12 @@ let api = new vamp.Api();
 let logger = new vamp.Log();
 let metrics = new vamp.ElasticsearchMetrics(api);
 
-let window = 30; // seconds
+let window = process.env.METRICS_TIME_WINDOW || 500; // seconds
 
-function publish(tags, metrics) {
+function publish(tags, value) {
   logger.log('metrics: [' + JSON.stringify(tags) + '] - ' + metrics);
-  api.event(tags, metrics, 'metrics');
+  metrics.event(tags, value, type).done(function () {
+  });
 }
 
 api.gateways().each(function (gateway) {

@@ -3,5 +3,7 @@ kind    : workflows
 breed   : allocation
 schedule: daemon
 environment_variables:
-  VAMP_WORKFLOW_EXECUTION_PERIOD:  5
-  VAMP_WORKFLOW_EXECUTION_TIMEOUT: 4
+  VAMP_WORKFLOW_EXECUTION_PERIOD:  60
+  VAMP_WORKFLOW_EXECUTION_TIMEOUT: 50
+  VAMP_ELASTICSEARCH_EVENT_TYPE  : allocation
+  VAMP_ELASTICSEARCH_EVENT_INDEX : ${es://allocation}

@@ -27,3 +27,4 @@ health_checks:
   timeout: 5s
   interval: 30s
   failures: 5
+  protocol: MESOS_HTTP

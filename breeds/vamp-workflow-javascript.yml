@@ -18,7 +18,7 @@ environment_variables:
   VAMP_PULSE_ELASTICSEARCH_URL    : ${config://vamp.pulse.elasticsearch.url}
   VAMP_WORKFLOW_DATA              : ${data}
   VAMP_GATEWAY_DRIVER_ELASTICSEARCH_METRICS_TYPE : log
-  VAMP_GATEWAY_DRIVER_ELASTICSEARCH_METRICS_INDEX: vamp-vga-*
+  VAMP_GATEWAY_DRIVER_ELASTICSEARCH_METRICS_INDEX: vamp-vga-${config://vamp.namespace}-*
 arguments:
 - privileged: true
 health_checks:

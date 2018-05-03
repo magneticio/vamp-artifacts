@@ -5,11 +5,12 @@ SHELL             := bash
 .DELETE_ON_ERROR  :
 .SUFFIXES         :
 
-STASH     := stash
-PROJECT   := vamp-artifacts
-VERSION   := $(shell git describe --tags)
-FABRICATOR:= magneticio/fabricator:alpine_3.7_toolbox
-TARGET    := $$HOME/.stash/$(PROJECT)
+STASH       := stash
+PROJECT     := vamp-artifacts
+PROJECT_DIR := $(CURDIR)
+VERSION     := $(shell git describe --tags)
+FABRICATOR  := magneticio/fabricator:alpine_3.7_toolbox
+TARGET      := $$HOME/.stash/$(PROJECT)
 
 # if Makefile.local exists, include it.
 ifneq ("$(wildcard Makefile.local)", "")
@@ -33,8 +34,8 @@ build:
 	docker run \
          --rm \
          --volume $(STASH):/root \
-         --volume $(CURDIR):/$(PROJECT) \
-         --workdir=/$(PROJECT) -it \
+         --volume $(PROJECT_DIR):/$(PROJECT) \
+         --workdir=/$(PROJECT) \
          $(FABRICATOR) make stash
 
 .PHONY: default

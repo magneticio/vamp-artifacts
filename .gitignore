@@ -1,3 +1,5 @@
 /Makefile.local
 /local.sh
 /target/
+
+.idea
